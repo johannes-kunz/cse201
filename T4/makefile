@@ -10,6 +10,16 @@ run: ex1.o Complex.o
 	$(CXX) Complex.o ex1.o -o run
 
 
+
+LinkedList.o: LinkedList.hpp LinkedList.cpp
+	$(CXX) -c LinkedList.cpp
+
+ex6.o: ex6.cpp LinkedList.hpp
+	$(CXX) -c ex6.cpp
+
+ex6: ex6.o LinkedList.o
+	$(CXX) LinkedList.o ex6.o -o ex6
+
 clean:
 	rm -f run
 	rm -f *.o
