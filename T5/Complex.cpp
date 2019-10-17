@@ -64,3 +64,27 @@ void Complex::print(){
 void Complex::printMaxComplex(){
   maxComplex.print();
 }
+
+
+
+Complex Complex::operator-(){
+  return Complex(-this->real, -this->imaginary);
+}                    // complex negation
+
+Complex Complex::operator+(const Complex &other){
+  return Complex(this->real + other.real, this->imaginary + other.imaginary);
+} // complex addition
+Complex Complex::operator-(const Complex &other){
+  return Complex(this->real - other.real, this->imaginary - other.imaginary);
+} // complex subtraction
+Complex Complex::operator*(const Complex &other){
+  return Complex(this->real * other.real - this->imaginary * other.imaginary,
+    this->imaginary * other.real + this->real * other.imaginary);
+} // complex multiplication
+
+bool Complex::operator==(const Complex &other){
+  return this->real == other.real && this->imaginary == other.imaginary;
+}   // pointwise comparison
+bool Complex::operator!=(const Complex &other){
+  return this->real != other.real || this->imaginary != other.imaginary;
+}   // inverse of above

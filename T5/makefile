@@ -23,3 +23,7 @@ ex6: ex6.o LinkedList.o
 clean:
 	rm -f run
 	rm -f *.o
+	rm -f veh
+
+veh: ex6.o Vehicle.cpp
+	$(CXX) Vehicle.cpp -o veh

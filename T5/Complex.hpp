@@ -30,6 +30,15 @@ public:
   void normalize();
   void print();
 
+  Complex operator-();                     // complex negation
+
+  Complex operator+(const Complex &other); // complex addition
+  Complex operator-(const Complex &other); // complex subtraction
+  Complex operator*(const Complex &other); // complex multiplication
+
+  bool operator==(const Complex &other);   // pointwise comparison
+  bool operator!=(const Complex &other);   // inverse of above
+
   static Complex maxComplex;
   static void printMaxComplex();
   static Complex fromMax();

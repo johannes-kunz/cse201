@@ -1,20 +1,45 @@
-
 #include <iostream>
+#include <cstdlib>
+
 #include "Complex.hpp"
 
-int main() {
-  Complex c1;
-  Complex c2 = Complex(3,4);
-  Complex c3 = Complex(2,3);
+Complex coord_transform(int row, int col, int width, int height)
+{
+  double x = 4.0 * col / width - 2.5;
+  double y = 2.2 * row / height - 1.1;
+  return Complex(x, y);
+}
 
-  Complex::printMaxComplex();
+const int n_rounds = 1000;
 
-  c3.setReal(5);
-  Complex::printMaxComplex();
+bool in_mandelbrot(const Complex &c)
+{
+  Complex z = c;
+  for (int rnd = 0; rnd < n_rounds; rnd++) {
+    z = z * z + c;
+    if (z.magnitude() > 2.0)
+      return true;
+  }
+  return false;
+}
 
-  Complex c4 = Complex::fromMax();
-  c4.setImaginary(c4.getImaginary() + 1);
-  c4.setImaginary(0);
+int main(int argc, char **argv)
+{
+  int width = 80, height = 40;
+  if (argc == 3) {
+    width = std::abs(std::atoi(argv[1]));
+    height = std::abs(std::atoi(argv[2]));
+  }
+  for (int r = 0; r < height; r ++) {
+    for (int c = 0; c < width; c ++) {
+      if (in_mandelbrot(coord_transform(r, c, width, height)))
+        std::cout << '#';
+      else
+        std::cout << ' ';
+    }
+    std::cout << std::endl;
+  }
 
-  Complex::printMaxComplex();
+  Complex c;
+  return 0;
 }
